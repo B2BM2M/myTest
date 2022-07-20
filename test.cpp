@@ -7,39 +7,52 @@ void count_string (string &tmpstring, int &most_vowel, int &most_consonants, int
 
 int main()
 {
-int mymost_consonants = 0;
-int mymost_vowel = 0;
-int myaccent_character = 0;
-map<int, string> WordResult;
+/*     int mymost_consonants = 0;
+    int mymost_vowel = 0;
+    int myaccent_character = 0; */
+    map<int, string> WordResult = {};
 
-string array_of_string [] = {"strengths", "ants 1", "turkey", "facetious"};
-int getArrayLength = sizeof(array_of_string)/sizeof(string);
+    string array_of_string [] = {"strengthsaeiueouy", "ants 1", "turkey", "facetious"};
+    int getArrayLength = sizeof(array_of_string)/sizeof(string);
 
-//cout << getArrayLength
+    // cout << getArrayLength;
 
-for (int i = 0; i < getArrayLength; i++)
-{
-    string getArrayWord = array_of_string[i];
-    count_string(getArrayWord, mymost_vowel, mymost_consonants, myaccent_character);
-    if (mymost_vowel >= mymost_consonants && mymost_vowel >= myaccent_character)
+    for (int i = 0; i < getArrayLength; i++)
+    //for (int i = 0; i < 4; i++)
     {
-        WordResult.insert({i, getArrayWord});
-    }
-    else if (mymost_consonants > mymost_vowel && mymost_consonants > myaccent_character)
-    {
-        WordResult.insert({i, getArrayWord});
-    }
-    else 
-    {
-        WordResult.insert({i, getArrayWord});
-    }
+        int  mymost_vowel = 0;
+        int  mymost_consonants = 0;
+        int myaccent_character = 0;
 
-}
- 
- for (auto itr = WordResult.begin(); itr !=WordResult.end(); itr++)
- {
-    cout << itr->first << '\t' << itr->second <<'\n';
- }
+        string getArrayWord = array_of_string[i];
+    //    cout << getArrayWord << endl;
+        count_string(getArrayWord, mymost_vowel, mymost_consonants, myaccent_character);
+        
+        if (mymost_vowel >= mymost_consonants && mymost_vowel >= myaccent_character)
+        {
+            WordResult.insert({mymost_vowel, getArrayWord});
+            cout << getArrayWord << " Has more Vowel " << '\t' << i << endl;
+            
+        }
+        else if (mymost_consonants >= mymost_vowel && mymost_consonants > myaccent_character)
+        {
+            WordResult.insert({mymost_consonants, getArrayWord});
+            cout << getArrayWord << " Has more Consonants " << '\t' << i << endl;
+           
+        }
+        else 
+        {
+            WordResult.insert({myaccent_character, getArrayWord});
+            cout << getArrayWord << " Accent  characters" << '\t' << i << endl;
+           
+        }
+
+    }
+    
+    for (auto itr = WordResult.begin(); itr !=WordResult.end(); itr++)
+    {
+        cout << itr->first << '\t' << itr->second <<'\n';
+    } 
 
 }
 
