@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
-#include <map>
 #include <vector>
+#include <map>
 using namespace std;
 
 void count_string (string &tmpstring, int &most_vowel, int &most_consonants, int &accent_character);
@@ -11,12 +11,11 @@ int main()
 /*     int mymost_consonants = 0;
     int mymost_vowel = 0;
     int myaccent_character = 0; */
-    map<string, int> WordResult = {};
+    map<int, string> WordResult;
 
-    string array_of_string [] = {"strengthsaeiueouy", "ants 1", "turkey", "facetious"};
+    string array_of_string [] = {"strengthsaeiueouy", "ants 1ew", "turkey", "facetious"};
     int getArrayLength = sizeof(array_of_string)/sizeof(string);
 
-    string vca_string[3]= {"vowels", "consonant", "Accent"};
     // storing values into 2D array (vowels, consonant, accen)
     // x = V[0], C[1], A[2] = 3 (fixed value)
     // y = array_of_string length = dynamic
@@ -29,8 +28,8 @@ int main()
     // looping through the array_of_string[] and count vowels, consonant, and accent characters
     for (int i = 0; i < getArrayLength; i++)
     {
-        int  mymost_vowel = 0;
-        int  mymost_consonants = 0;
+        int mymost_vowel = 0;
+        int mymost_consonants = 0;
         int myaccent_character = 0;
 
         string getArrayWord = array_of_string[i];
@@ -41,31 +40,30 @@ int main()
         storeVCA [i][2] = myaccent_character;  
     }
    // look for max value in 2D array
+   int tmp_tracking_max [getArrayLength];
     for (int row = 0; row < getArrayLength ; row++)
     {
-        int max = 0;
         int tmp = 0;
-        cout << " row " << row << endl;
+        int max = 0;
         for (int column = 0; column < 3; column++)
         { 
-            cout << "column " << column << endl;;
             if(storeVCA[column][row] > max)
             {
                max = storeVCA[column][row];
-               //tmp = column;  
+               //tmp = column;
+               tmp_tracking_max[row] = max;
             }
         }
-       // cout << tmp << endl;
-        cout << max << endl;
-       // WordResult.insert({array_of_string[row], max});         
-    } 
-    
-/*     cout << "Vowels" << " \t" << "Consonant" << "\t" <<"Vowels " << endl;
-
-    for (int i = 0; i < getArrayLength; i++)
+        //cout << max << endl;
+        WordResult.insert({max, array_of_string[row]});
+    }//cout << tmp << endl;
+    //cout << array_of_string[tmp] << endl;
+    map<int, string>::iterator it;
+    for (it = WordResult.begin(); it !=WordResult.end(); it++)
     {
-        cout << array_of_string[i] << "\t" << WordResult.at(array_of_string[i]) << endl;
-    } */
+        cout << "[" << (*it).first << ", " << (*it).second << "]" << endl;
+    }
+
 }
 
 void count_string (string &inputWords, int &most_vowel, int &most_consonants, int &accent_character)
@@ -87,4 +85,3 @@ void count_string (string &inputWords, int &most_vowel, int &most_consonants, in
         }
     }
 }
-
